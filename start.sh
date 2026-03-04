@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Starting Semantic Desktop Dev Environment..."
+echo "🚀 Starting Semantic Desktop Search Dev Environment..."
 
 cd frontend
 if [ ! -d "node_modules" ]; then npm install; fi
