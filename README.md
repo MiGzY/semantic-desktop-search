@@ -36,7 +36,7 @@ Clone the repository:
 
 ``` bash
 git clone https://github.com/MiGzY/semantic-desktop-search.git
-cd semantic-desktop
+cd semantic-desktop-search
 ```
 
 Make the launcher executable:
@@ -136,7 +136,7 @@ Features:
 -   Always use `start.sh` during development.
 -   Do not run Tauri before the frontend dev server is available.
 -   Backend integration (FastAPI or similar) can be added later.
--   Use stop-servers.sh to kill servers running on port 5173 and 3000.
+-   Use stop-servers.sh to kill servers running on port 5173 and 3000. (You will need to make the launcher executable        chmod +x stop-servers.sh)
 
 ------------------------------------------------------------------------
 
