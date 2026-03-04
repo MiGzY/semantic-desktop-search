@@ -1,4 +1,4 @@
-# Semantic Desktop Search
+# Semantic Desktop Search (Front-End)
 
 ![React](https://img.shields.io/badge/React-18-blue)
 ![Tauri](https://img.shields.io/badge/Tauri-v2-green)
