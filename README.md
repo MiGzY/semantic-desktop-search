@@ -35,7 +35,7 @@ notification system for clean, modern user feedback.
 Clone the repository:
 
 ``` bash
-git clone <your-repo-url>
+git clone https://github.com/MiGzY/semantic-desktop-search.git
 cd semantic-desktop
 ```
 
