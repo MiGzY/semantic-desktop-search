@@ -1,4 +1,4 @@
-# Semantic Desktop -- GitHub Release Checklist
+# Semantic Desktop Search - GitHub Release Checklist
 
 ## ✅ Pre-Release
 
