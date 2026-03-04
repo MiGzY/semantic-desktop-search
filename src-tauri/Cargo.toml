@@ -1,0 +1,8 @@
+[package]
+name = "semantic_desktop"
+version = "0.1.0"
+authors = ["You <you@example.com>"]
+edition = "2021"
+
+[dependencies]
+tauri = { version = "1.4", features = ["api-all"] }

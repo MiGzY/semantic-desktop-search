@@ -1,0 +1,19 @@
+{
+  "$schema": "https://tauri.app/v1/schema.json",
+  "build": {},
+  "package": {
+    "productName": "Semantic Desktop",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Semantic Desktop",
+        "width": 800,
+        "height": 600,
+        "fullscreen": false,
+        "resizable": true
+      }
+    ]
+  }
+}
