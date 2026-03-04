@@ -136,7 +136,7 @@ Features:
 -   Always use `start.sh` during development.
 -   Do not run Tauri before the frontend dev server is available.
 -   Backend integration (FastAPI or similar) can be added later.
--   use stop-servers.sh to kill the server running on port 3000.
+-   Use stop-servers.sh to kill servers running on port 5173 and 3000.
 
 ------------------------------------------------------------------------
 
