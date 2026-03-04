@@ -21,7 +21,7 @@ function AppContent() {
 
     return (
         <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
-            <h1>Semantic Desktop</h1>
+            <h1>Semantic Desktop Search</h1>
             <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
                 <input
                     type="text"
