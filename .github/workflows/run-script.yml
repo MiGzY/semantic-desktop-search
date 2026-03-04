@@ -9,5 +9,7 @@ jobs:
     runs-on: ubuntu-latest   # GitHub's server (Ubuntu)
     steps:
       - uses: actions/checkout@v3   # Checks out your repo files
+      - name: Debug - list root files
+        run: ls -la
       - name: Run script
         run: bash ./script.sh
