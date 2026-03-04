@@ -1,11 +1,11 @@
-# Semantic Desktop
+# Semantic Desktop Search
 
 ![React](https://img.shields.io/badge/React-18-blue)
 ![Tauri](https://img.shields.io/badge/Tauri-v2-green)
 ![Node](https://img.shields.io/badge/Node-18%2B-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Semantic Desktop is a cross-platform desktop application built with
+Semantic Desktop Search is a cross-platform desktop application built with
 **React 18** and **Tauri**, featuring a fully custom inline toast
 notification system for clean, modern user feedback.
 
@@ -147,8 +147,6 @@ See the full release checklist here:
 [Release Checklist](./RELEASE_CHECKLIST.md)
 
 ## 📜 License
-
-MIT License
 
 MIT License
 
