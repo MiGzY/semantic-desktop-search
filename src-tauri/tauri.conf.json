@@ -3,7 +3,10 @@
   "identifier": "com.migz.semantic-desktop-search",
   "productName": "Semantic Desktop Search",
   "version": "0.1.0",
-  "build": {},
+  "build": {
+    "devUrl": "http://localhost:3000",
+    "frontendDist": "../frontend/build"
+  },
   "app": {
     "windows": [
       {
