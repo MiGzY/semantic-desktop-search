@@ -6,6 +6,12 @@
     "version": "0.1.0"
   },
   "tauri": {
+    "allowlist": {
+      "dialog": {
+        "all": false,
+        "open": true
+      }
+    },
     "windows": [
       {
         "title": "Semantic Desktop Search",
