@@ -10,7 +10,6 @@
   "app": {
     "windows": [
       {
-        "title": "Semantic Desktop Search",
         "width": 800,
         "height": 600,
         "fullscreen": false,
