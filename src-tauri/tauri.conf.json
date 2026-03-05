@@ -14,10 +14,5 @@
         "resizable": true
       }
     ]
-  },
-  "plugins": {
-    "dialog": {
-      "open": true
-    }
   }
 }
