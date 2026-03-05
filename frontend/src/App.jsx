@@ -3,17 +3,6 @@ import React, { useState, useRef } from "react";
 import { ToastProvider, useToast } from "./ToastProvider";
 import { search, ingestDirectory, getHealth } from "./api";
 
-// Tauri dialog API — only available inside the desktop app
-async function pickDirectory() {
-    try {
-        const { open } = await import("@tauri-apps/plugin-dialog");
-        return await open({ directory: true, multiple: false, title: "Select a folder to index" });
-    } catch {
-        // Running in browser dev mode — fall back gracefully
-        return null;
-    }
-}
-
 function AppContent() {
     const [q, setQ] = useState("");
     const [results, setResults] = useState([]);
@@ -38,8 +27,15 @@ function AppContent() {
     };
 
     const handlePickDirectory = async () => {
-        const selected = await pickDirectory();
-        if (selected) setIngestPath(selected);
+        try {
+            // Tauri v2 — use window.__TAURI__ which is always injected in the webview
+            const { open } = window.__TAURI__.dialog;
+            const selected = await open({ directory: true, multiple: false, title: "Select a folder to index" });
+            if (selected) setIngestPath(selected);
+        } catch (err) {
+            addToast("Folder picker unavailable in browser — type path manually", "info");
+            console.error("Dialog error:", err);
+        }
     };
 
     const handleSearch = async () => {
@@ -86,7 +82,6 @@ function AppContent() {
 
             {/* Ingest panel */}
             <div style={{ marginBottom: 20, background: "#f5f5f5", padding: 12, borderRadius: 6 }}>
-                
                 <p style={{ fontWeight: "bold", marginBottom: 8, marginTop: 0 }}>📂 Index a directory</p>
                 <div style={{ display: "flex", gap: 8 }}>
                     <input
