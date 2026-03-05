@@ -1,14 +1,30 @@
 // src/App.jsx
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ToastProvider, useToast } from "./ToastProvider";
-import { search, ingestDirectory } from "./api";
+import { search, ingestDirectory, getHealth } from "./api";
 
 function AppContent() {
     const [q, setQ] = useState("");
     const [results, setResults] = useState([]);
     const [ingestPath, setIngestPath] = useState("");
     const [ingesting, setIngesting] = useState(false);
+    const [indexedCount, setIndexedCount] = useState(null);
+    const pollRef = useRef(null);
     const addToast = useToast();
+
+    const startPolling = () => {
+        pollRef.current = setInterval(async () => {
+            try {
+                const health = await getHealth();
+                setIndexedCount(health.indexed_files);
+            } catch (_) {}
+        }, 1000);
+    };
+
+    const stopPolling = () => {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+    };
 
     const handleSearch = async () => {
         try {
@@ -24,6 +40,8 @@ function AppContent() {
     const handleIngest = async () => {
         if (!ingestPath.trim()) return;
         setIngesting(true);
+        setIndexedCount(0);
+        startPolling();
         addToast("Indexing in progress…", "info");
         try {
             const res = await ingestDirectory(ingestPath.trim());
@@ -33,6 +51,12 @@ function AppContent() {
             addToast("Ingest failed: " + (err?.message ?? "unknown error"), "error");
             console.error(err);
         } finally {
+            stopPolling();
+            // Final health check to get accurate count
+            try {
+                const health = await getHealth();
+                setIndexedCount(health.indexed_files);
+            } catch (_) {}
             setIngesting(false);
         }
     };
@@ -60,7 +84,47 @@ function AppContent() {
                         {ingesting ? "Indexing…" : "Index"}
                     </button>
                 </div>
+
+                {/* Progress indicator */}
+                {ingesting && indexedCount !== null && (
+                    <div style={{ marginTop: 10 }}>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            fontSize: 12,
+                            color: "#555",
+                            marginBottom: 4
+                        }}>
+                            <span>⚙️ Embedding chunks…</span>
+                            <span>{indexedCount.toLocaleString()} chunks indexed</span>
+                        </div>
+                        <div style={{ height: 6, background: "#ddd", borderRadius: 3, overflow: "hidden" }}>
+                            <div style={{
+                                height: "100%",
+                                width: "100%",
+                                background: "linear-gradient(90deg, #4f8ef7 0%, #a78bfa 100%)",
+                                backgroundSize: "200% 100%",
+                                animation: "shimmer 1.5s infinite linear",
+                            }} />
+                        </div>
+                    </div>
+                )}
+
+                {/* Done state */}
+                {!ingesting && indexedCount !== null && (
+                    <div style={{ marginTop: 10, fontSize: 12, color: "#2a7a2a" }}>
+                        ✅ Index complete — {indexedCount.toLocaleString()} chunks stored
+                    </div>
+                )}
             </details>
+
+            {/* Shimmer animation */}
+            <style>{`
+                @keyframes shimmer {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
+                }
+            `}</style>
 
             {/* Search bar */}
             <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
