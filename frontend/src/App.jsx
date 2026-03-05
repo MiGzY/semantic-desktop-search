@@ -6,7 +6,7 @@ import { search, ingestDirectory, getHealth } from "./api";
 // Tauri dialog API — only available inside the desktop app
 async function pickDirectory() {
     try {
-        const { open } = await import("@tauri-apps/api/dialog");
+        const { open } = await import("@tauri-apps/plugin-dialog");
         return await open({ directory: true, multiple: false, title: "Select a folder to index" });
     } catch {
         // Running in browser dev mode — fall back gracefully
