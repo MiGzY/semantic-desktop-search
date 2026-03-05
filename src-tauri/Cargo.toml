@@ -5,4 +5,12 @@ authors = ["Miguel Manzano <mtecsystems@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-tauri = { version = "1.4", features = ["api-all"] }
+tauri = { version = "2.0", features = [] }
+tauri-plugin-dialog = "2.0"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
