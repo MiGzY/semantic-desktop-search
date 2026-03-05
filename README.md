@@ -209,9 +209,7 @@ Always run uvicorn via the venv path:
 ```
 
 **Port 8000 already in use**
-```bash
-kill -9 $(lsof -ti :8000)
-```
+Run `./stop-servers.sh` — it automatically clears both ports 3000 and 8000.
 
 **Browse button does nothing**
 The native folder picker only works inside the Tauri desktop window, not in the browser at `localhost:3000`.
