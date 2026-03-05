@@ -1,23 +1,28 @@
 #!/bin/bash
+echo "🛑 Stopping all Semantic Desktop Search servers..."
 
-echo "Stopping React and Tauri development servers..."
+for PORT in 3000 8000; do
+    echo "  Clearing port $PORT..."
+    # Try lsof first
+    PIDS=$(lsof -ti tcp:$PORT 2>/dev/null)
+    if [ -n "$PIDS" ]; then
+        echo "$PIDS" | xargs kill -9 2>/dev/null
+        echo "  ✅ Killed PIDs $PIDS on port $PORT"
+    fi
+    # Also try fuser as a backup
+    fuser -k $PORT/tcp 2>/dev/null && echo "  ✅ fuser cleared port $PORT" || true
+done
 
-# 1. Kill process on port 5173 (Vite/React default) or 3000 (CRA default)
-# Add or change ports as needed
-FOR_PORT_8000=$(lsof -t -i:8000)
-FOR_PORT_3000=$(lsof -t -i:3000)
+# Double check
+sleep 1
+for PORT in 3000 8000; do
+    REMAINING=$(lsof -ti tcp:$PORT 2>/dev/null)
+    if [ -n "$REMAINING" ]; then
+        echo "  ⚠️  Port $PORT still in use by PID $REMAINING — trying again..."
+        kill -9 $REMAINING 2>/dev/null || true
+    else
+        echo "  ✅ Port $PORT is free"
+    fi
+done
 
-if [ ! -z "$FOR_PORT_8000" ]; then
-  kill -9 $FOR_PORT_8000
-  echo "Killed React/Vite on port 5173"
-fi
-
-if [ ! -z "$FOR_PORT_3000" ]; then
-  kill -9 $FOR_PORT_3000
-  echo "Killed React on port 3000"
-fi
-
-# 2. Kill any processes with 'tauri' in the name
-pkill -f tauri
-
-echo "Cleanup complete."
+echo "✅ Done."
