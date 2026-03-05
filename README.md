@@ -220,7 +220,9 @@ The native folder picker only works inside the Tauri desktop window, not in the 
 
 - Always use `start.sh` during development — it boots all three layers in the right order.
 - The FAISS index persists between sessions in `app/data/`.
-- Use `stop-servers.sh` to kill servers on ports 3000 and 8000.
+- Use `stop-servers.sh` to kill servers on ports 3000 and 8000.  If it's still stuck after this, run:
+  sudo lsof -i :8000
+  sudo lsof -i :3000
 
 ---
 
