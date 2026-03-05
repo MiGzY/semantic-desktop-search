@@ -50,8 +50,14 @@ semantic-desktop-search/
 │   │   └── main.rs                   # Tauri app entry point + dialog plugin
 │   ├── capabilities/
 │   │   └── default.json              # Tauri permissions (dialog:allow-open)
-│   ├── icons/
-│   │   └── icon.png                  # App icon
+│   ├── icons/                        # App icons (all sizes + formats)
+│   │   ├── icon.png                  # Master icon (512x512)
+│   │   ├── icon.icns                 # macOS
+│   │   ├── icon.ico                  # Windows
+│   │   ├── 32x32.png
+│   │   ├── 128x128.png
+│   │   ├── 128x128@2x.png
+│   │   └── Square*Logo.png           # Windows Store icons
 │   ├── tauri.conf.json               # Tauri configuration
 │   ├── Cargo.toml                    # Rust dependencies
 │   └── build.rs                      # Tauri build script
