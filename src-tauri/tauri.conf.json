@@ -1,17 +1,10 @@
 {
-  "$schema": "https://tauri.app/v1/schema.json",
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "com.migz.semantic-desktop-search",
+  "productName": "Semantic Desktop Search",
+  "version": "0.1.0",
   "build": {},
-  "package": {
-    "productName": "Semantic Desktop Search",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "dialog": {
-        "all": false,
-        "open": true
-      }
-    },
+  "app": {
     "windows": [
       {
         "title": "Semantic Desktop Search",
@@ -21,5 +14,10 @@
         "resizable": true
       }
     ]
+  },
+  "plugins": {
+    "dialog": {
+      "open": true
+    }
   }
 }
