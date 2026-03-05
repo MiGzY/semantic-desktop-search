@@ -85,9 +85,10 @@ function AppContent() {
             <h1>🔍 Semantic Desktop Search</h1>
 
             {/* Ingest panel */}
-            <details style={{ marginBottom: 20, background: "#f5f5f5", padding: 12, borderRadius: 6 }}>
-                <summary style={{ cursor: "pointer", fontWeight: "bold" }}>📂 Index a directory</summary>
-                <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
+            <div style={{ marginBottom: 20, background: "#f5f5f5", padding: 12, borderRadius: 6 }}>
+                
+                <p style={{ fontWeight: "bold", marginBottom: 8, marginTop: 0 }}>📂 Index a directory</p>
+                <div style={{ display: "flex", gap: 8 }}>
                     <input
                         type="text"
                         value={ingestPath}
@@ -143,7 +144,7 @@ function AppContent() {
                         ✅ Index complete — {indexedCount.toLocaleString()} chunks stored
                     </div>
                 )}
-            </details>
+            </div>
 
             {/* Shimmer animation */}
             <style>{`
