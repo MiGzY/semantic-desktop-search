@@ -7,8 +7,8 @@ echo "Stopping React and Tauri development servers..."
 FOR_PORT_5173=$(lsof -t -i:5173)
 FOR_PORT_3000=$(lsof -t -i:3000)
 
-if [ ! -z "$FOR_PORT_5173" ]; then
-  kill -9 $FOR_PORT_5173
+if [ ! -z "$FOR_PORT_8000" ]; then
+  kill -9 $FOR_PORT_8000
   echo "Killed React/Vite on port 5173"
 fi
 
