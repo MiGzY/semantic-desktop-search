@@ -24,11 +24,13 @@ function AppContent() {
     const handleIngest = async () => {
         if (!ingestPath.trim()) return;
         setIngesting(true);
+        addToast("Indexing in progress…", "info");
         try {
             const res = await ingestDirectory(ingestPath.trim());
-            addToast(res.message, "success");
+            const msg = res?.message ?? "Indexing complete";
+            addToast(msg, "success");
         } catch (err) {
-            addToast("Ingest failed: " + err.message, "error");
+            addToast("Ingest failed: " + (err?.message ?? "unknown error"), "error");
             console.error(err);
         } finally {
             setIngesting(false);
