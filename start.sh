@@ -30,7 +30,7 @@ echo "📦 Installing Python dependencies..."
 pip install -r requirements.txt -q
 
 echo "🐍 Starting FastAPI backend on http://127.0.0.1:8000 ..."
-uvicorn main:app --host 127.0.0.1 --port 8000 &
+.venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000 &
 BACKEND_PID=$!
 
 echo "⏳ Waiting for backend..."
