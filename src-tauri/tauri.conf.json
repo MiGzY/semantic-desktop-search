@@ -8,6 +8,7 @@
     "frontendDist": "../frontend/build"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": " ",
