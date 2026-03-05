@@ -3,6 +3,17 @@ import React, { useState, useRef } from "react";
 import { ToastProvider, useToast } from "./ToastProvider";
 import { search, ingestDirectory, getHealth } from "./api";
 
+// Tauri dialog API — only available inside the desktop app
+async function pickDirectory() {
+    try {
+        const { open } = await import("@tauri-apps/api/dialog");
+        return await open({ directory: true, multiple: false, title: "Select a folder to index" });
+    } catch {
+        // Running in browser dev mode — fall back gracefully
+        return null;
+    }
+}
+
 function AppContent() {
     const [q, setQ] = useState("");
     const [results, setResults] = useState([]);
@@ -24,6 +35,11 @@ function AppContent() {
     const stopPolling = () => {
         clearInterval(pollRef.current);
         pollRef.current = null;
+    };
+
+    const handlePickDirectory = async () => {
+        const selected = await pickDirectory();
+        if (selected) setIngestPath(selected);
     };
 
     const handleSearch = async () => {
@@ -52,7 +68,6 @@ function AppContent() {
             console.error(err);
         } finally {
             stopPolling();
-            // Final health check to get accurate count
             try {
                 const health = await getHealth();
                 setIndexedCount(health.indexed_files);
@@ -80,7 +95,19 @@ function AppContent() {
                         placeholder="/Users/you/Documents"
                         style={{ flex: 1, padding: 8, fontSize: 14 }}
                     />
-                    <button onClick={handleIngest} disabled={ingesting} style={{ padding: "8px 12px" }}>
+                    <button
+                        onClick={handlePickDirectory}
+                        disabled={ingesting}
+                        title="Browse for folder"
+                        style={{ padding: "8px 12px", whiteSpace: "nowrap" }}
+                    >
+                        📁 Browse
+                    </button>
+                    <button
+                        onClick={handleIngest}
+                        disabled={ingesting || !ingestPath.trim()}
+                        style={{ padding: "8px 12px", whiteSpace: "nowrap" }}
+                    >
                         {ingesting ? "Indexing…" : "Index"}
                     </button>
                 </div>
