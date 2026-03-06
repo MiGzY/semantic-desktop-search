@@ -63,6 +63,8 @@ semantic-desktop-search/
 │   ├── Cargo.toml                    # Rust dependencies
 │   └── build.rs                      # Tauri build script
 ├── docs/
+│   └── RELEASE-CHECKLIST.md
+│   └── python-venv-cheat-sheet.md
 │   └── screenshot-main.png
 ├── README.md
 ├── start.sh                          # One-command dev launcher
