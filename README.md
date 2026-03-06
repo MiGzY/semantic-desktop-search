@@ -45,7 +45,7 @@ semantic-desktop-search/
 │   │   ├── api.js                    # fetch() calls to FastAPI backend
 │   │   └── ToastProvider.jsx         # Custom toast notification system
 │   └── public/
-│   │   └── index.html
+│   │   └── index.html                # HTML shell that React injects itself into
 ├── src-tauri/                        # Tauri v2 desktop wrapper
 │   ├── src/
 │   │   └── main.rs                   # Tauri app entry point + dialog plugin
